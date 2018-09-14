@@ -22,8 +22,8 @@ from dist_database import library, labels
 
 '''OR
 # create some normal random noisy data'''
-#ser = np.random.normal(10, 10, 100)
-#ser2 = 2*np.random.uniform(1,40, 100) + np.random.normal(10, 10, 100)
+ser = np.random.normal(10, 10, 100)
+ser2 = 2*np.random.uniform(1,40, 100) + np.random.normal(10, 10, 100)
 
 def do(ser,name):
     
@@ -81,13 +81,13 @@ def do(ser,name):
     plt.show()  
     
 
-#do(ser,'example')
-#do(ser2,'example 2')
+do(ser,'example 1')
+do(ser2,'example 2')
 
 
 'database: performs function for all entries on database:'
-for i in range(size(library())):
-    do(library()[i],labels()[i])
+#for i in range(size(library())):
+#    do(library()[i],labels()[i])
     
 'database: performs function for selected entries on database:'
 #do(library()[0],labels()[0])
