@@ -24,9 +24,12 @@ from dist_database import library, labels
 # create some normal random noisy data'''
 ser = np.random.normal(10, 10, 100)
 ser2 = 2*np.random.uniform(1,40, 100) + np.random.normal(10, 10, 100)
+ser3 = 3*np.random.uniform(1,40, 100) + 4*np.random.normal(10, 10, 100)
+
 
 def do(ser,name):
     
+
     # plot normed histogram
     plt.hist(ser, normed=True, label=name)
 
@@ -42,7 +45,7 @@ def do(ser,name):
 #    plt.plot(lnspc, pdf_g,label="Normal " + name) # plot it
     plt.plot(lnspc, pdf_g) 
 
-    print(name, 'distribution statistics')
+    print(name, 'distribution fit statistics')
     print('sample size = ',size(ser))
     print('normal: ' ,'mean', np.round(m,2),'std_dev', np.round(s,2))
     #
@@ -58,23 +61,22 @@ def do(ser,name):
     
 
     'gamma'
-    ag,bg,cg = stats.gamma.fit(ser)  
-    pdf_gamma = stats.gamma.pdf(lnspc, ag, bg,cg)  
-#    plt.plot(lnspc, pdf_gamma, label="Gamma " + name )
-    plt.plot(lnspc, pdf_gamma )
-    print('Gamma: ' ,'aG', np.round(ag,2),'bG', np.round(bg,2),\
-          'cG', np.round(cg,2))
+#    ag,bg,cg = stats.gamma.fit(ser)  
+#    pdf_gamma = stats.gamma.pdf(lnspc, ag, bg,cg)  
+##    plt.plot(lnspc, pdf_gamma, label="Gamma " + name )
+#    plt.plot(lnspc, pdf_gamma )
+#    print('Gamma: ' ,'aG', np.round(ag,2),'bG', np.round(bg,2),\
+#          'cG', np.round(cg,2))
 
     
     'beta'
-    ab,bb,cb,db = stats.beta.fit(ser)  
-    pdf_beta = stats.beta.pdf(lnspc, ab, bb,cb, db)  
-#    plt.plot(lnspc, pdf_beta, label="Beta " + name)
-    plt.plot(lnspc, pdf_beta)
-    print('Beta: ' ,'aB', np.round(ab,2),'bB', np.round(bb,2),\
-          'cB', np.round(cb,2),'dB', np.round(db,2))
-    print()
-
+#    ab,bb,cb,db = stats.beta.fit(ser)  
+#    pdf_beta = stats.beta.pdf(lnspc, ab, bb,cb, db)  
+##    plt.plot(lnspc, pdf_beta, label="Beta " + name)
+#    plt.plot(lnspc, pdf_beta)
+#    print('Beta: ' ,'aB', np.round(ab,2),'bB', np.round(bb,2),\
+#          'cB', np.round(cb,2),'dB', np.round(db,2))
+#    print()
 
     plt.legend()
     
@@ -83,13 +85,20 @@ def do(ser,name):
 
 do(ser,'example 1')
 do(ser2,'example 2')
-
+do(ser3,'example 3')
 
 'database: performs function for all entries on database:'
 #for i in range(size(library())):
 #    do(library()[i],labels()[i])
     
 'database: performs function for selected entries on database:'
-#do(library()[0],labels()[0])
-#do(library()[1],labels()[1])
+#plt.figure()
+##do(library()[0],labels()[0])
+##do(library()[1],labels()[1])
+#
+##do(library()[2],labels()[2])
+##do(library()[3],labels()[3])
+###
+#do(library()[4],labels()[4])
+#do(library()[5],labels()[5])
 
