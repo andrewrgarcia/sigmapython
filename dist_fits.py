@@ -6,7 +6,7 @@ Created on Wed Sep 12 17:43:08 2018
 """
 
 ''' 
-A probability distribution fitting script
+A PROBABILITY DENSITY FUNCTION (PDF) FITTING SCRIPT
 
 adapted from Daniel Hnyk's python code:
 http://danielhnyk.cz/fitting-distribution-histogram-using-python/
@@ -83,22 +83,27 @@ def do(ser,name):
     plt.show()  
     
 
-do(ser,'example 1')
-do(ser2,'example 2')
-do(ser3,'example 3')
+#do(ser,'example 1')
+#do(ser2,'example 2')
+#do(ser3,'example 3')
 
-'database: performs function for all entries on database:'
+'database: performs function for all entries on database (plots all in single window):'
 #for i in range(size(library())):
-#    do(library()[i],labels()[i])
+#    
+#    if any([ i==6,i==7,i==8]):
+#        do(library()[i],labels()[i])
+        
+' """ """"""""" """"""""""""" """""""""" """"""""" """" (plots each in separate window):'
+for i in range(size(library())):
     
-'database: performs function for selected entries on database:'
-#plt.figure()
-##do(library()[0],labels()[0])
-##do(library()[1],labels()[1])
-#
-##do(library()[2],labels()[2])
-##do(library()[3],labels()[3])
-###
-#do(library()[4],labels()[4])
-#do(library()[5],labels()[5])
-
+    if any([i==4, i==6,i==7,i==8,i==9,i==10,i==11]):
+        plt.figure()
+        do(library()[i],labels()[i])
+        
+        
+        
+        
+        
+        
+        
+    
