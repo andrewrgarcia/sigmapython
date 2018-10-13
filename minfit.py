@@ -49,5 +49,6 @@ fit = eqn(x,result.x)
 
 plt.figure()
 
-plt.plot(x,exps,'o')
-plt.plot(x,fit)
+plt.plot(x,exps,'o',label='data')
+plt.plot(x,fit,label='fit')
+plt.legend()
