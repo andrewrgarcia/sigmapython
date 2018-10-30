@@ -50,5 +50,6 @@ fit = eqn(x,result.x)
 plt.figure()
 
 plt.plot(x,exps,'o',label='data')
+plt.text(0,1,'$s$')
 plt.plot(x,fit,label='fit')
 plt.legend()
