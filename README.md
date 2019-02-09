@@ -1,8 +1,9 @@
 # statistics
-Statistics with python. Goal is to replace the R statistical software (ha just kidding).
+A statistical analysis python package
+Open-source fitting capabilities
+#### Andrew Garcia, 2019
 
-Fitting capabilities open to the people.
 
-pdsfit.py - probability distribution fitting: basically find a good distribution for your histograms.
-
-minfit.py - it's a simple nonlinear fit (as in those usually performed through Excel) through an error minimization algorithm.
+- [x] Histogram distribution fitting *pdsfit.py*
+  basically find a good distribution for your histograms.
+- [x] Non-linear function fitting *minfit.py* it's a simple nonlinear fit (as in those usually performed through Excel) through an error minimization algorithm

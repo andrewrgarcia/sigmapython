@@ -20,22 +20,22 @@ import xlwings as xw
 
 '''make your own database (for help on building a database, 
 see database template on my XRD repository)'''
-#from dist_database import excelbook
-#book, label = excelbook()
-#
-##end = 60
-##end = 77
+from dist_database import excelbook
+book, label = excelbook()
+
+end = 60
+#end = 77
 #end = 301
-#
-#diam =   book.sheets['Results'].range( 'I2:I'+str(end) ).value 
-#feret =   book.sheets['Results'].range( 'D2:D'+str(end) ).value 
-#minferet =   book.sheets['Results'].range( 'H2:H'+str(end) ).value 
+
+diam =   book.sheets['Results'].range( 'I2:I'+str(end) ).value 
+feret =   book.sheets['Results'].range( 'D2:D'+str(end) ).value 
+minferet =   book.sheets['Results'].range( 'H2:H'+str(end) ).value 
 
 
 '''some random noisy data (examples)'''
-ex1 = np.random.normal(10, 10, 1000)
-ex2 = 2*np.random.uniform(1,40, 1000) + np.random.normal(10, 10, 1000)
-ex3 = 3*np.random.exponential(4,1000)
+#ex1 = np.random.normal(10, 10, 1000)
+#ex2 = 2*np.random.uniform(1,40, 1000) + np.random.normal(10, 10, 1000)
+#ex3 = 3*np.random.exponential(4,1000)
 
 
 def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
@@ -157,11 +157,14 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
     
 #make(feret,label+' (Feret Long)')
 #make(minferet,label+' (Feret Short)')
-#make(diam,label+' (Diameter)',['norm','lognorm'])
+make(diam,label+' (Diameter)')
 
-make(ex1,'example 1')
-make(ex2,'example 2')
-make(ex3,'example 3')
+book.close()
 
 
-#book.close()
+
+#make(ex1,'example 1')
+#make(ex2,'example 2')
+#make(ex3,'example 3')
+
+
