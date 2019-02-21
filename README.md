@@ -15,10 +15,16 @@ e.g. make(datapoints,'mydata',pds=['gauss','lognormal']) will use the data vecto
       gamma
       beta*
 
+![Screenshot](pdsfit_Figure_1.png)
+![Screenshot](pdsfit_Figure_2.png)
+![Screenshot](pdsfit_Figure_3.png)
+
 
 ## minfit.py
 A nonlinear fitting script (as in those usually performed through Excel)
 that performs through an error minimization algorithm.
+
+![Screenshot](minfit_Figure_1.png)
 
 ## linreq.py
 A simple template for linear fits
