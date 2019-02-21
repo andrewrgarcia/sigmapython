@@ -23,7 +23,7 @@ see database template on my XRD repository)'''
 from dist_database import excelbook
 book, label = excelbook()
 
-end = 60
+end = 22
 #end = 77
 #end = 301
 
@@ -158,7 +158,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
 #make(feret,label+' (Feret Long)')
 #make(minferet,label+' (Feret Short)')
 make(diam,label+' (Diameter)')
-
+make(diam,label+' (Diameter)',pds=['gauss','lognorm'])
 book.close()
 
 
