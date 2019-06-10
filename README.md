@@ -25,9 +25,9 @@ e.g. make(datapoints,'mydata',pds=['gauss','lognormal']) will use the data vecto
 <img src="pdsfit_Figure_1.png" alt="drawing" width="350"/><img src="pdsfit_Figure_2.png" alt="drawing" width="350"/>
 <img src="pdsfit_Figure_3.png" alt="drawing" width="350"/>
 
->![Screenshot](pdsfit_Figure_1.png)
->![Screenshot](pdsfit_Figure_2.png)
->![Screenshot](pdsfit_Figure_3.png)
+<!---  ![Screenshot](pdsfit_Figure_1.png)
+![Screenshot](pdsfit_Figure_2.png)
+![Screenshot](pdsfit_Figure_3.png) -->
 
 
 ## minfit.py
@@ -35,7 +35,7 @@ A nonlinear fitting script (as in those usually performed through Excel)
 that performs through an error minimization algorithm.
 
 <img src="minfit_Figure_1.png" alt="drawing" width="350"/>
->![Screenshot](minfit_Figure_1.png)
+<!--- ![Screenshot](minfit_Figure_1.png) -->
 
 ## linreg.py
 A simple template for linear fits
