@@ -3,6 +3,12 @@ A statistical analysis python package
 Open-source fitting capabilities
 #### Andrew Garcia, 2019
 
+##spss_convert.py
+
+Extract SPSS files (.sav) with python / convert to .csv format
+must install pyreadstat:
+> pip install pyreadstat
+
 ## pdsfit.py
 Histogram distribution fitting script: Turns raw data to histogram and fits to a selected or series of probability density function(s)
 e.g. make(datapoints,'mydata',pds=['gauss','lognormal']) will use the data vector "datapoints" to generate its histogram, and then fit it to a Gaussian and a lognormal distribution. 'mydata' will be displayed as the title to the generated plot.

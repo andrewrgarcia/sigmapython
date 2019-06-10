@@ -18,14 +18,15 @@ import numpy as np
 import matplotlib.pylab as plt
 import xlwings as xw
 
-'''make your own database (for help on building a database, 
-see database template on my XRD repository)'''
+'''make your own database
+*you may use my database template XRD_database_template.py
+at https://github.com/andrewrgarcia/xrd'''
 from dist_database import excelbook
 book, label = excelbook()
 
-end = 22
-#end = 77
-#end = 301
+
+end = 490
+
 
 diam =   book.sheets['Results'].range( 'I2:I'+str(end) ).value 
 feret =   book.sheets['Results'].range( 'D2:D'+str(end) ).value 
@@ -45,7 +46,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
     'plot density histogram'
     wts = np.ones_like(data) / float(len(data))
     
-    plt.hist(data, stacked =True, weights=wts,color='navy')
+    plt.hist(data,stacked =True, weights=wts,color='navy')
 
     '''find minimum and maximum of xticks, so we know
      where we should compute theoretical distribution'''
@@ -155,10 +156,12 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
     plt.show()  
     
     
-#make(feret,label+' (Feret Long)')
-#make(minferet,label+' (Feret Short)')
-make(diam,label+' (Diameter)')
+#make(feret,label+' (Feret Long)',pds=['gauss','lognorm'])
+#make(minferet,label+' (Feret Short)',pds=['gauss','lognorm'])
 make(diam,label+' (Diameter)',pds=['gauss','lognorm'])
+
+#make(diam,label+' (Diameter)')
+
 book.close()
 
 
