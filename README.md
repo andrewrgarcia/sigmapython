@@ -42,4 +42,4 @@ A simple template for linear fits
 - [x] Calculates R^2, p value, and standard error of a linear fitting.
 - [x] Example selects data points randomly and performs linear regression thereof:
 
-<img src="linreg_Figure_1.png" alt="drawing" width="350"/>
+<img src="linreg_Figure_1.png" alt="drawing" width="350"/><img src="linreg_Figure_2.png" alt="drawing" width="350"/>
