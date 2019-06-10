@@ -3,10 +3,11 @@ A statistical analysis python package
 Open-source fitting capabilities
 #### Andrew Garcia, 2019
 
-##spss_convert.py
+## spss_convert.py
 
 Extract SPSS files (.sav) with python / convert to .csv format
-must install pyreadstat:
+
+* must install pyreadstat:
 > pip install pyreadstat
 
 ## pdsfit.py
