@@ -22,17 +22,24 @@ e.g. make(datapoints,'mydata',pds=['gauss','lognormal']) will use the data vecto
       gamma
       beta*
 
-![Screenshot](pdsfit_Figure_1.png)
-![Screenshot](pdsfit_Figure_2.png)
-![Screenshot](pdsfit_Figure_3.png)
+<img src="pdsfit_Figure_1.png" alt="drawing" width="350"/><img src="pdsfit_Figure_2.png" alt="drawing" width="350"/>
+<img src="pdsfit_Figure_3.png" alt="drawing" width="350"/>
+
+>![Screenshot](pdsfit_Figure_1.png)
+>![Screenshot](pdsfit_Figure_2.png)
+>![Screenshot](pdsfit_Figure_3.png)
 
 
 ## minfit.py
 A nonlinear fitting script (as in those usually performed through Excel)
 that performs through an error minimization algorithm.
 
-![Screenshot](minfit_Figure_1.png)
+<img src="minfit_Figure_1.png" alt="drawing" width="350"/>
+>![Screenshot](minfit_Figure_1.png)
 
-## linreq.py
+## linreg.py
 A simple template for linear fits
 - [x] Calculates R^2, p value, and standard error of a linear fitting.
+- [x] Example selects data points randomly and performs linear regression thereof:
+
+<img src="linreg_Figure_1.png" alt="drawing" width="350"/>

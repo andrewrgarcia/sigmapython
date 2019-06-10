@@ -12,27 +12,32 @@ import pylab as plt
 import scipy.linalg as lin
 from scipy import stats
 
+'DATA POINTS TO FIT (replace xk yk with coordinates for data pts.)'
 xk = np.random.random(25)
 yk = np.random.random(25)
+
+'FITTING'
 slope, intercept, r_value, p_value, std_err = stats.linregress(xk,yk)
 
+
+'PLOTTING'
 x=np.arange(0,1,0.01)
 y=slope*x+intercept
 
 plt.figure()
 
-plt.plot(x, y,color='red',label=r'regression line')
-plt.plot(xk, yk,'o',color='gold',label=r'measurements')
+plt.plot(xk, yk,'o',label=r'measurements')
+plt.plot(x, y,label=r'regression line')
 plt.legend(loc='lower right')
 #plt.xlim(0,1)
 #plt.ylim(0,6)
-plt.xlabel('x-axis')
-plt.ylabel('y-axis')
-plt.title('title')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('fit')
 plt.show()
 
-plt.text(0.05,0.80,"$R^2$= "+str(round(r_value**2,3)))
-plt.text(0.05,0.75,"y = "+str(round(slope,3))+r"x + "+str(round(intercept,3)))
+plt.text(0.05,0.80,"$R^2$= "+str(round(r_value**2,3)),size=12)
+plt.text(0.05,0.75,"y = "+str(round(slope,3))+r"x + "+str(round(intercept,3)),size=12)
 
 print ("R^2", r_value**2)
 print ("p value", p_value)
