@@ -18,25 +18,28 @@ import numpy as np
 import matplotlib.pylab as plt
 import xlwings as xw
 
-'''make your own database
-*you may use my database template XRD_database_template.py
-at https://github.com/andrewrgarcia/xrd'''
-from dist_database import excelbook
-book, label = excelbook()
+'''lastRow credit: answered Sep 14 '16 at 11:39  -  Stefan 
+https://stackoverflow.com/questions/33418119/xlwings-function-to-find-the-last-row-with-data'''
+def lastRow(idx, workbook, col=1):
+    """ Find the last row in the worksheet that contains data.
 
+    idx: Specifies the worksheet to select. Starts counting from zero.
 
-end = 490
+    workbook: Specifies the workbook
 
+    col: The column in which to look for the last cell containing data.
+    """
 
-diam =   book.sheets['Results'].range( 'I2:I'+str(end) ).value 
-feret =   book.sheets['Results'].range( 'D2:D'+str(end) ).value 
-minferet =   book.sheets['Results'].range( 'H2:H'+str(end) ).value 
+    ws = workbook.sheets[idx]
 
+    lwr_r_cell = ws.cells.last_cell      # lower right cell
+    lwr_row = lwr_r_cell.row             # row of the lower right cell
+    lwr_cell = ws.range((lwr_row, col))  # change to your specified column
 
-'''some random noisy data (examples)'''
-#ex1 = np.random.normal(10, 10, 1000)
-#ex2 = 2*np.random.uniform(1,40, 1000) + np.random.normal(10, 10, 1000)
-#ex3 = 3*np.random.exponential(4,1000)
+    if lwr_cell.value is None:
+        lwr_cell = lwr_cell.end('up')    # go up untill you hit a non-empty cell
+
+    return lwr_cell.row
 
 
 def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
@@ -46,20 +49,20 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
     'plot density histogram'
     wts = np.ones_like(data) / float(len(data))
     
-    plt.hist(data,stacked =True, weights=wts,color='navy')
-
+    n, bins, patches = plt.hist(data,stacked =True, weights=wts,\
+                                color='dodgerblue',edgecolor='k',linewidth=1.2)
+#    plt.show()
+    
     '''find minimum and maximum of xticks, so we know
      where we should compute theoretical distribution'''
     xt = plt.xticks()[0]  
     xmin, xmax = min(xt), max(xt)  
     
-#    N_lspc = len(data)
-    N_lspc = 1000
-
-    lspc = np.linspace(xmin, xmax, N_lspc)
+    lspc = np.linspace(xmin, xmax, 1000)
     
     'to scale normalized bins with fits'
-    max_normbins = np.max (hist(data, stacked =True, weights=wts)[0])
+#    max_normbins = np.max(hist(data, stacked =True, weights=wts)[0])
+    max_normbins = np.max(n)
 
     
     '''*NORMAL DISTRIBUTION (GAUSSIAN)'''
@@ -71,7 +74,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
         pdf_g = stats.norm.pdf(lspc, m, s)  * (max_normbins/max_pdf)     
     #    plt.plot(lspc, pdf_g,label="Normal " + name) # plot it
     
-        plt.plot(lspc, pdf_g,color='k',label='normal') 
+        plt.plot(lspc, pdf_g,color='purple',label='normal') 
     
     #    print(name, 'distribution fit statistics')
         print('')
@@ -100,7 +103,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
         max_pdf = np.max(stats.lognorm.pdf(lspc, s,loc,scale))
         pdf_logn = stats.lognorm.pdf(lspc, s,loc,scale) * (max_normbins/max_pdf)
         
-        plt.plot(lspc, pdf_logn,color='lime',label="lognormal") # plot it
+        plt.plot(lspc, pdf_logn,color='gold',label="lognormal") # plot it
         
         plt.xlabel('Length  /  $\mu m$')
         print('\n lognormal: \n s {} loc {} scale {} \
@@ -115,7 +118,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
         max_pdf = np.max(stats.expon.pdf(lspc, loc,scale))
         pdf_expon = stats.expon.pdf(lspc, loc,scale)  * (max_normbins/max_pdf)   
         
-        plt.plot(lspc, pdf_expon,label="expon")
+        plt.plot(lspc, pdf_expon,color='crimson',label="expon")
         print('\n exponential: \n loc {} scale {} \
               \n '.format(loc,scale))
         
@@ -153,21 +156,35 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
     plt.title(name)
     plt.legend()
     
-    plt.show()  
-    
-    
+
+'''MAKE YOUR OWN DATABASE
+*you may use my database template XRD_database_template.py
+at https://github.com/andrewrgarcia/xrd'''
+from dist_database import excelbook
+book, label = excelbook('SEM')
+
+idx = 'Results'
+diam =   book.sheets[idx].range( 'I2:I'+str(lastRow(idx,book)) ).value 
+feret =   book.sheets[idx].range( 'D2:D'+str(lastRow(idx,book)) ).value 
+minferet =   book.sheets[idx].range( 'H2:H'+str(lastRow(idx,book)) ).value     
+
 #make(feret,label+' (Feret Long)',pds=['gauss','lognorm'])
 #make(minferet,label+' (Feret Short)',pds=['gauss','lognorm'])
-make(diam,label+' (Diameter)',pds=['gauss','lognorm'])
-
+#make(diam,label+' (Diameter)',pds=['gauss','lognorm'])
 #make(diam,label+' (Diameter)')
+'''------------------------------------------------------------------------'''
+
+
+'''some random noisy data (examples)'''
+ex1 = np.random.normal(10, 10, 1000)
+ex2 = 2*np.random.uniform(1,40, 1000) + np.random.normal(10, 10, 1000)
+ex3 = 3*np.random.exponential(4,1000)
+
+make(ex1,'example 1')
+make(ex2,'example 2')
+make(ex3,'example 3')
+'''------------------------------------------------------------------------'''
+
 
 book.close()
-
-
-
-#make(ex1,'example 1')
-#make(ex2,'example 2')
-#make(ex3,'example 3')
-
 
