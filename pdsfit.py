@@ -42,7 +42,7 @@ def lastRow(idx, workbook, col=1):
     return lwr_cell.row
 
 
-def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
+def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],xlims=''):
         
     plt.figure()
 
@@ -51,7 +51,9 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
     
     n, bins, patches = plt.hist(data,stacked =True, weights=wts,\
                                 color='dodgerblue',edgecolor='k',linewidth=1.2)
-#    plt.show()
+
+    
+    plt.xlim(0,400) if xlims=='y' else None
     
     '''find minimum and maximum of xticks, so we know
      where we should compute theoretical distribution'''
@@ -81,8 +83,11 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
         print(name)
     
     
-        print('sample size = ',size(data))
-        print('normal: ' ,'mean', np.round(m,2),'std_dev', np.round(s,2))
+        print('sample_size \n {}'.format(size(data)))
+        print('\n normal: \n \
+              mean sdev \n \
+              {} {}'.format(np.round(m,2),np.round(s,2)))
+#        print('normal: ' ,'mean', np.round(m,2),'std_dev', np.round(s,2))
     
     '''*LOGNORMAL DISTRIBUTION'''
     if 'lognorm' in pds:
@@ -91,13 +96,11 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
         '''parametrization'
     #    https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html
     #    https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html'''
-        mu = np.log(scale)
+        mean = np.log(scale)
         sigma = s
+#        mean, var, skew, kurt = stats.lognorm.stats(s, moments='mvsk')
         
-        mean = np.exp(mu + 0.5*sigma**2)
-        median = np.exp(mu)
-        mode = np.exp(mu -sigma**2)
-#        variance = (np.exp(sigma**2) - 1) *np.exp(2*mean +sigma**2)
+        median = scale
         
         'scale normalized pd to bins'
         max_pdf = np.max(stats.lognorm.pdf(lspc, s,loc,scale))
@@ -106,9 +109,15 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
         plt.plot(lspc, pdf_logn,color='gold',label="lognormal") # plot it
         
         plt.xlabel('Length  /  $\mu m$')
-        print('\n lognormal: \n s {} loc {} scale {} \
-              \n mean = {} \n median = {} \n mode = {} \
-              \n '.format(np.round(s,2),np.round(loc,2), np.round(scale,2),mean,median,mode))
+        
+        print('\n lognormal: \n \
+              s loc scale mean median \n \
+              {} {} {} {} {} \n'.format(np.round(s,2),np.round(loc,2), np.round(scale,2),mean,median))
+
+        
+#        print('\n lognormal: \n s {} loc {} scale {} \
+#              \n mean = {} \n median = {} \n mode = {} \
+#              \n '.format(np.round(s,2),np.round(loc,2), np.round(scale,2),mean,median,mode))
 
     '''*EXPONENTIAL DISTRIBUTION'''
     if 'expon' in pds:
@@ -161,21 +170,22 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta']):
 *you may use my database template XRD_database_template.py
 at https://github.com/andrewrgarcia/xrd'''
 from dist_database import excelbook
-book, label = excelbook('SEM')
+'book, label = excelbook(tool,expt)'
 
-idx = 'Results'
-diam =   book.sheets[idx].range( 'I2:I'+str(lastRow(idx,book)) ).value 
-feret =   book.sheets[idx].range( 'D2:D'+str(lastRow(idx,book)) ).value 
-minferet =   book.sheets[idx].range( 'H2:H'+str(lastRow(idx,book)) ).value     
-
-#make(feret,label+' (Feret Long)',pds=['gauss','lognorm'])
-#make(minferet,label+' (Feret Short)',pds=['gauss','lognorm'])
+#idx = 'Results'
+#diam =   book.sheets[idx].range( 'I2:I'+str(lastRow(idx,book)) ).value 
+#feret =   book.sheets[idx].range( 'D2:D'+str(lastRow(idx,book)) ).value 
+#minferet =   book.sheets[idx].range( 'H2:H'+str(lastRow(idx,book)) ).value     
+#
 #make(diam,label+' (Diameter)',pds=['gauss','lognorm'])
 #make(diam,label+' (Diameter)')
+
+#book.close()
+
 '''------------------------------------------------------------------------'''
 
 
-'''some random noisy data (examples)'''
+'''EXAMPLES'''
 ex1 = np.random.normal(10, 10, 1000)
 ex2 = 2*np.random.uniform(1,40, 1000) + np.random.normal(10, 10, 1000)
 ex3 = 3*np.random.exponential(4,1000)
@@ -186,5 +196,4 @@ make(ex3,'example 3')
 '''------------------------------------------------------------------------'''
 
 
-book.close()
 
