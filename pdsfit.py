@@ -6,7 +6,7 @@ Created on Wed Sep 12 17:43:08 2018
 """
 
 ''' 
-pdsfit.py - A PROBABILITY DENSITY (PD) FITTING SCRIPT
+pdsfit.py - A PROBABILITY DENSITY FUNCTION (PDF) FITTING SCRIPT
 Andrew Garcia*
 
 *adapted from Daniel Hnyk's python code:
@@ -17,6 +17,7 @@ from scipy import stats
 import numpy as np  
 import matplotlib.pylab as plt
 import xlwings as xw
+import pandas as pd
 
 '''lastRow credit: answered Sep 14 '16 at 11:39  -  Stefan 
 https://stackoverflow.com/questions/33418119/xlwings-function-to-find-the-last-row-with-data'''
@@ -49,7 +50,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],xlims=''):
     'plot density histogram'
     wts = np.ones_like(data) / float(len(data))
     
-    n, bins, patches = plt.hist(data,stacked =True, weights=wts,\
+    n, bins, patches = plt.hist(data,bins=40,stacked =True, weights=wts,\
                                 color='dodgerblue',edgecolor='k',linewidth=1.2)
 
     
@@ -65,6 +66,14 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],xlims=''):
     'to scale normalized bins with fits'
 #    max_normbins = np.max(hist(data, stacked =True, weights=wts)[0])
     max_normbins = np.max(n)
+
+    'save stats -- labels and values'
+    stats_lbl = []
+    stats_val = []
+    stats_lbl.append('sample_name')
+    stats_val.append(name)
+    stats_lbl.append('sample_size')
+    stats_val.append(size(data))
 
     
     '''*NORMAL DISTRIBUTION (GAUSSIAN)'''
@@ -87,6 +96,11 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],xlims=''):
         print('\n normal: \n \
               mean sdev \n \
               {} {}'.format(np.round(m,2),np.round(s,2)))
+        
+        stats_lbl.append('normal_mean'), stats_val.append(m)
+        stats_lbl.append('normal_sdev'), stats_val.append(s)
+
+
 #        print('normal: ' ,'mean', np.round(m,2),'std_dev', np.round(s,2))
     
     '''*LOGNORMAL DISTRIBUTION'''
@@ -114,7 +128,12 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],xlims=''):
               s loc scale mean median \n \
               {} {} {} {} {} \n'.format(np.round(s,2),np.round(loc,2), np.round(scale,2),mean,median))
 
-        
+        stats_lbl.append('lognorm_s'), stats_val.append(s)
+        stats_lbl.append('lognorm_loc'), stats_val.append(loc)
+        stats_lbl.append('lognorm_scale'), stats_val.append(scale)
+        stats_lbl.append('lognorm_mean'), stats_val.append(mean)
+        stats_lbl.append('lognorm_median'), stats_val.append(median)
+
 #        print('\n lognormal: \n s {} loc {} scale {} \
 #              \n mean = {} \n median = {} \n mode = {} \
 #              \n '.format(np.round(s,2),np.round(loc,2), np.round(scale,2),mean,median,mode))
@@ -131,6 +150,8 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],xlims=''):
         print('\n exponential: \n loc {} scale {} \
               \n '.format(loc,scale))
         
+        stats_lbl.append('expon_loc'), stats_val.append(loc)
+        stats_lbl.append('expon_scale'), stats_val.append(scale)
         
         
     '''*GAMMA DISTRIBUTION'''
@@ -145,6 +166,10 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],xlims=''):
         plt.plot(lspc, pdf_gamma,label="gamma")
         print('Gamma: ' ,'aG', np.round(ag,2),'bG', np.round(bg,2),\
               'cG', np.round(cg,2))
+        
+        stats_lbl.append('gamma_a'), stats_val.append(ag)
+        stats_lbl.append('gamma_b'), stats_val.append(bg)
+        stats_lbl.append('gamma_c'), stats_val.append(cg)
 
     
     '''*BETA DISTRIBUTION'''
@@ -161,28 +186,58 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],xlims=''):
         print('Beta: ' ,'aB', np.round(ab,2),'bB', np.round(bb,2),\
               'cB', np.round(cb,2),'dB', np.round(db,2))
         print()
+        
+        stats_lbl.append('beta_a'), stats_val.append(ab)
+        stats_lbl.append('beta_b'), stats_val.append(bb)
+        stats_lbl.append('beta_c'), stats_val.append(cb)
+        stats_lbl.append('beta_d'), stats_val.append(db)
+
 
     plt.title(name)
     plt.legend()
     
+    return stats_lbl, stats_val
+
+
+
+'''    EXECUTION   '''
 
 '''MAKE YOUR OWN DATABASE
 *you may use my database template XRD_database_template.py
 at https://github.com/andrewrgarcia/xrd'''
-from dist_database import excelbook
-'book, label = excelbook(tool,expt)'
+from dist_database import excelbook, mysamples
+def batch():
+    
+    Gval = []
+    samples = mysamples()
 
-#idx = 'Results'
-#diam =   book.sheets[idx].range( 'I2:I'+str(lastRow(idx,book)) ).value 
-#feret =   book.sheets[idx].range( 'D2:D'+str(lastRow(idx,book)) ).value 
-#minferet =   book.sheets[idx].range( 'H2:H'+str(lastRow(idx,book)) ).value     
-#
-#make(diam,label+' (Diameter)',pds=['gauss','lognorm'])
-#make(diam,label+' (Diameter)')
+    for i in samples:
+        book, label = excelbook('SEM',i)
+        idx = 'Results'
+        diam =   book.sheets[idx].range( 'I2:I'+str(lastRow(idx,book)) ).value 
+#        feret =   book.sheets[idx].range( 'D2:D'+str(lastRow(idx,book)) ).value 
+#        minferet =   book.sheets[idx].range( 'H2:H'+str(lastRow(idx,book)) ).value    
+        lbl,val = make(diam,label+' (Diameter)')
+        book.close()
 
-#book.close()
+        Gval.append(val)
 
-'''------------------------------------------------------------------------'''
+        
+    df = pd.DataFrame(Gval, columns=lbl)
+    print(df)
+    
+    'write to excel'
+    wb = xw.Book()
+    sht = wb.sheets['Sheet1']
+    sht.range('A1').value = df
+    sht.range('A1').options(pd.DataFrame, expand='table').value
+
+#batch()
+
+'''------------------------------------------------------------------------------------'''
+
+
+
 
 
 '''EXAMPLES'''
@@ -190,10 +245,11 @@ ex1 = np.random.normal(10, 10, 1000)
 ex2 = 2*np.random.uniform(1,40, 1000) + np.random.normal(10, 10, 1000)
 ex3 = 3*np.random.exponential(4,1000)
 
-make(ex1,'example 1')
-make(ex2,'example 2')
+make(ex1,'example 1',['gamma','beta'])
+make(ex2,'example 2',['gauss'])
 make(ex3,'example 3')
-'''------------------------------------------------------------------------'''
+
+'''------------------------------------------------------------------------------------'''
 
 
 
