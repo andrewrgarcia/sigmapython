@@ -43,14 +43,14 @@ def lastRow(idx, workbook, col=1):
     return lwr_cell.row
 
 
-def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],xlims=''):
+def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],bins= 40,xlims=''):
         
     plt.figure()
 
     'plot density histogram'
     wts = np.ones_like(data) / float(len(data))
     
-    n, bins, patches = plt.hist(data,bins=40,stacked =True, weights=wts,\
+    n, bins, patches = plt.hist(data,bins = bins,stacked =True, weights=wts,\
                                 color='dodgerblue',edgecolor='k',linewidth=1.2)
 
     
@@ -245,9 +245,9 @@ ex1 = np.random.normal(10, 10, 1000)
 ex2 = 2*np.random.uniform(1,40, 1000) + np.random.normal(10, 10, 1000)
 ex3 = 3*np.random.exponential(4,1000)
 
-make(ex1,'example 1',['gamma','beta'])
-make(ex2,'example 2',['gauss'])
-make(ex3,'example 3')
+make(ex1,'example 1',['gamma','beta'],20)
+make(ex2,'example 2',['gauss'],20)
+make(ex3,'example 3',bins=20)
 
 '''------------------------------------------------------------------------------------'''
 
