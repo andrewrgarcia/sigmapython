@@ -43,9 +43,9 @@ def lastRow(idx, workbook, col=1):
     return lwr_cell.row
 
 
-def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],bins= 40,xlims=''):
+def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],plots=True,bins= 40,xlims=[0,400]):
         
-    plt.figure()
+    plt.figure() if plots is True else None
 
     'plot density histogram'
     wts = np.ones_like(data) / float(len(data))
@@ -54,7 +54,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],bins= 40,xlims
                                 color='dodgerblue',edgecolor='k',linewidth=1.2)
 
     
-    plt.xlim(0,400) if xlims=='y' else None
+    plt.xlim(xlims) if xlims != '' else None
     
     '''find minimum and maximum of xticks, so we know
      where we should compute theoretical distribution'''
@@ -85,7 +85,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],bins= 40,xlims
         pdf_g = stats.norm.pdf(lspc, m, s)  * (max_normbins/max_pdf)     
     #    plt.plot(lspc, pdf_g,label="Normal " + name) # plot it
     
-        plt.plot(lspc, pdf_g,color='purple',label='normal') 
+        plt.plot(lspc, pdf_g,color='purple',label='normal') if plots is True else None
     
     #    print(name, 'distribution fit statistics')
         print('')
@@ -120,7 +120,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],bins= 40,xlims
         max_pdf = np.max(stats.lognorm.pdf(lspc, s,loc,scale))
         pdf_logn = stats.lognorm.pdf(lspc, s,loc,scale) * (max_normbins/max_pdf)
         
-        plt.plot(lspc, pdf_logn,color='gold',label="lognormal") # plot it
+        plt.plot(lspc, pdf_logn,color='gold',label="lognormal") if plots is True else None
         
         plt.xlabel('Length  /  $\mu m$')
         
@@ -146,7 +146,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],bins= 40,xlims
         max_pdf = np.max(stats.expon.pdf(lspc, loc,scale))
         pdf_expon = stats.expon.pdf(lspc, loc,scale)  * (max_normbins/max_pdf)   
         
-        plt.plot(lspc, pdf_expon,color='crimson',label="expon")
+        plt.plot(lspc, pdf_expon,color='crimson',label="expon") if plots is True else None
         print('\n exponential: \n loc {} scale {} \
               \n '.format(loc,scale))
         
@@ -163,7 +163,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],bins= 40,xlims
         max_pdf = np.max(stats.gamma.pdf(lspc, ag,bg,cg))
         pdf_gamma = stats.gamma.pdf(lspc, ag,bg,cg)  * (max_normbins/max_pdf)   
         
-        plt.plot(lspc, pdf_gamma,label="gamma")
+        plt.plot(lspc, pdf_gamma,label="gamma") if plots is True else None
         print('Gamma: ' ,'aG', np.round(ag,2),'bG', np.round(bg,2),\
               'cG', np.round(cg,2))
         
@@ -182,7 +182,7 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],bins= 40,xlims
         max_pdf = np.max(stats.beta.pdf(lspc, ab,bb,cb,db))
         pdf_beta = stats.beta.pdf(lspc, ab,bb,cb,db)  * (max_normbins/max_pdf)   
         
-        plt.plot(lspc, pdf_beta,label="beta")
+        plt.plot(lspc, pdf_beta,label="beta") if plots is True else None
         print('Beta: ' ,'aB', np.round(ab,2),'bB', np.round(bb,2),\
               'cB', np.round(cb,2),'dB', np.round(db,2))
         print()
@@ -193,8 +193,8 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],bins= 40,xlims
         stats_lbl.append('beta_d'), stats_val.append(db)
 
 
-    plt.title(name)
-    plt.legend()
+    plt.title(name) if plots is True else None
+    plt.legend() if plots is True else None
     
     return stats_lbl, stats_val
 
@@ -205,8 +205,18 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],bins= 40,xlims
 '''MAKE YOUR OWN DATABASE
 *you may use my database template XRD_database_template.py
 at https://github.com/andrewrgarcia/xrd'''
-from dist_database import excelbook, mysamples
-def batch():
+from pds_database import excelbook, mysample, mysamples
+
+def single():
+    book, label = excelbook('SEM',mysample())
+    idx = 'Results'
+    diam =   book.sheets[idx].range( 'I2:I'+str(lastRow(idx,book)) ).value 
+    make(diam,label+' (Diameter)',['gauss','lognorm'],bins=300,plots=True,xlims='')
+    book.close()
+
+single()
+
+def batch(toexcel=True):
     
     Gval = []
     samples = mysamples()
@@ -217,7 +227,7 @@ def batch():
         diam =   book.sheets[idx].range( 'I2:I'+str(lastRow(idx,book)) ).value 
 #        feret =   book.sheets[idx].range( 'D2:D'+str(lastRow(idx,book)) ).value 
 #        minferet =   book.sheets[idx].range( 'H2:H'+str(lastRow(idx,book)) ).value    
-        lbl,val = make(diam,label+' (Diameter)')
+        lbl,val = make(diam,label+' (Diameter)',['gauss','lognorm'],plots=True,xlims='')
         book.close()
 
         Gval.append(val)
@@ -226,11 +236,12 @@ def batch():
     df = pd.DataFrame(Gval, columns=lbl)
     print(df)
     
-    'write to excel'
-    wb = xw.Book()
-    sht = wb.sheets['Sheet1']
-    sht.range('A1').value = df
-    sht.range('A1').options(pd.DataFrame, expand='table').value
+    if toexcel is True:
+        'write to excel'
+        wb = xw.Book()
+        sht = wb.sheets['Sheet1']
+        sht.range('A1').value = df
+        sht.range('A1').options(pd.DataFrame, expand='table').value
 
 #batch()
 
@@ -238,16 +249,15 @@ def batch():
 
 
 
-
-
 '''EXAMPLES'''
-ex1 = np.random.normal(10, 10, 1000)
-ex2 = 2*np.random.uniform(1,40, 1000) + np.random.normal(10, 10, 1000)
-ex3 = 3*np.random.exponential(4,1000)
+#ex1 = np.random.normal(10, 10, 1000)
+#ex2 = 2*np.random.uniform(1,40, 1000) + np.random.normal(10, 10, 1000)
+#ex3 = 3*np.random.exponential(4,1000)
 
-make(ex1,'example 1',['gamma','beta'],20)
-make(ex2,'example 2',['gauss'],20)
-make(ex3,'example 3',bins=20)
+#
+#make(ex1,'example 1',['gamma','beta'],20)
+#make(ex2,'example 2',['gauss'],20)
+#make(ex3,'example 3',bins=20)
 
 '''------------------------------------------------------------------------------------'''
 
