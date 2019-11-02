@@ -126,10 +126,8 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],\
     fit('gamma') if 'gamma' in pds else None
     fit('beta') if 'beta' in pds else None
 
-    
-    print(stats_lbl)
-    print(stats_val)
-
+#    print(stats_lbl)
+#    print(stats_val)
 
     plt.title(name) if plots is True else None
     plt.legend() if plots is True else None
