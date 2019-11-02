@@ -43,7 +43,7 @@ def lastRow(idx, workbook, col=1):
     return lwr_cell.row
 
 
-def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],plots=True,bins= 40,xlims=[0,400]):
+def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],plots=True,bins= 15,xlims=[0,400]):
         
     plt.figure() if plots is True else None
 
@@ -211,12 +211,12 @@ def single():
     book, label = excelbook('SEM',mysample())
     idx = 'Results'
     diam =   book.sheets[idx].range( 'I2:I'+str(lastRow(idx,book)) ).value 
-    make(diam,label+' (Diameter)',['gauss','lognorm'],bins=300,plots=True,xlims='')
+    make(diam,label+' (Diameter)',['gauss','lognorm'],bins=100,plots=True,xlims='')
     book.close()
 
 single()
 
-def batch(toexcel=True):
+def batch(toexcel=True,plots=True):
     
     Gval = []
     samples = mysamples()
@@ -227,7 +227,7 @@ def batch(toexcel=True):
         diam =   book.sheets[idx].range( 'I2:I'+str(lastRow(idx,book)) ).value 
 #        feret =   book.sheets[idx].range( 'D2:D'+str(lastRow(idx,book)) ).value 
 #        minferet =   book.sheets[idx].range( 'H2:H'+str(lastRow(idx,book)) ).value    
-        lbl,val = make(diam,label+' (Diameter)',['gauss','lognorm'],plots=True,xlims='')
+        lbl,val = make(diam,label+' (Diameter)',['gauss','lognorm'],plots=plots)
         book.close()
 
         Gval.append(val)
@@ -243,7 +243,7 @@ def batch(toexcel=True):
         sht.range('A1').value = df
         sht.range('A1').options(pd.DataFrame, expand='table').value
 
-#batch()
+#batch(True)
 
 '''------------------------------------------------------------------------------------'''
 
