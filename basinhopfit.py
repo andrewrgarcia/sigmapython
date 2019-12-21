@@ -15,40 +15,21 @@ import matplotlib.pyplot as plt
 
 import numpy.random as nran
 
+
 from scipy.special import jv
 
 
-'''LOADS EXPERIMENTAL DATA (change line 45)'''
+'''LOAD EXPERIMENTAL DATA'''
 import xlwings as xw
 
-'''lastRow credit: answered Sep 14 '16 at 11:39  -  Stefan 
-https://stackoverflow.com/questions/33418119/xlwings-function-to-find-the-last-row-with-data'''
-def lastRow(idx, workbook, col=1):
-    """ Find the last row in the worksheet that contains data.
-
-    idx: Specifies the worksheet to select. Starts counting from zero.
-
-    workbook: Specifies the workbook
-
-    col: The column in which to look for the last cell containing data.
-    """
-
-    ws = workbook.sheets[idx]
-
-    lwr_r_cell = ws.cells.last_cell      # lower right cell
-    lwr_row = lwr_r_cell.row             # row of the lower right cell
-    lwr_cell = ws.range((lwr_row, col))  # change to your specified column
-
-    if lwr_cell.value is None:
-        lwr_cell = lwr_cell.end('up')    # go up untill you hit a non-empty cell
-
-    return lwr_cell.row
-
 'CHANGE TO PATH OF EXCEL FILE WITH DATA'
-path = r'C:\Users\garci\Dropbox (Personal)\scripts\statistics\basinhop_TEMPLATE.xlsx'
+path = r'C:\Users\garci\Dropbox (Personal)\scripts\statistics\basinhop_template.xlsx'
 book = xw.Book(path)
 
-sheet='Sheet1'
+sheet='datagen'
+
+from pdsfit import lastRow
+
 x1=book.sheets[sheet].range('A2:A'+str(lastRow(sheet,book))).value
 x2=book.sheets[sheet].range('B2:B'+str(lastRow(sheet,book))).value
 y_exps=book.sheets[sheet].range('C2:C'+str(lastRow(sheet,book))).value
@@ -101,7 +82,7 @@ def make(niter=200):
     
     
     
-    '''PLOTTING (lines 122 -141)'''
+    '''PLOTTING '''
     from mpl_toolkits import mplot3d
     fig = plt.figure()
     ax = plt.axes(projection='3d')
@@ -110,7 +91,6 @@ def make(niter=200):
     ax.scatter(x1, x2, y_exps,'o',color='C6',edgecolors='w')
     
     'Theory'
-    'lines 94 95: 30 numbers from 0 to 10 for x and T variables'
     x1_theory = np.linspace(min(x1), max(x1), 100)
     x2_theory = np.linspace(min(x2), max(x2), 100)
     'sets up 3d mesh'
@@ -123,5 +103,5 @@ def make(niter=200):
     ax.set_ylabel('x2')
     ax.set_zlabel('y')
 
-#make(1)
-make()
+make(1)
+#make()
