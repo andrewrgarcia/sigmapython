@@ -1,6 +1,6 @@
 # A Simple and Free Statistics Package
 ## Andrew Garcia, 2019
-<img src="basinhopfit_Figure_1.png" alt="drawing" width="200"/>
+<img src="basinhopfit_Figure_1.png" alt="drawing" width="400"/>
 
 Welcome to the statistics repository! Some changes have been made to streamline the user experience. Click on the Jupyter presentations below to get a feel of the scripts and how to use them.
 
