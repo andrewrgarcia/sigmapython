@@ -1,7 +1,13 @@
-# A user friendly, open sourced statistics & data analysis python package
-A statistical analysis python package
-Open-source fitting capabilities
+# A Simple and Free Statistics Package
 #### Andrew Garcia, 2019
+Welcome to the statistics repository! Some changes have been made to streamline the user experience. Click on the Jupyter presentations below to get a feel of the scripts and how to use them.
+
+## Histogram Distribution Fitting
+
+<a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_tutorial.ipynb"><img src="jupyter.png" alt="drawing" width="100"/></a>
+
+## Equation Fitting - Local and Global Error Minimization Algorithms
+<a href="https://github.com/andrewrgarcia/statistics/blob/master/minimization-fitting.ipynb"><img src="jupyter.png" alt="drawing" width="100"/></a>
 
 ## spss_convert.py
 
@@ -10,32 +16,6 @@ Extract SPSS files (.sav) with python / convert to .csv format
 * must install pyreadstat:
 > pip install pyreadstat
 
-## pdsfit.py
-Histogram distribution fitting script: Turns raw data to histogram and fits to a selected or series of probability density function(s)
-e.g. make(datapoints,'mydata',pds=['gauss','lognormal']) will use the data vector "datapoints" to generate its histogram, and then fit it to a Gaussian and a lognormal distribution. 'mydata' will be displayed as the title to the generated plot.
-
-- [x] Parameters obtained from fitting will be displayed in python shell.
-- [x] Currently supports fitting histograms to 5 distribution types:
-      *gaussian(normal)
-      lognormal
-      exponential
-      gamma
-      beta*
-
-<img src="pdsfit_Figure_1.png" alt="drawing" width="350"/><img src="pdsfit_Figure_2.png" alt="drawing" width="350"/>
-<img src="pdsfit_Figure_3.png" alt="drawing" width="350"/>
-
-<!---  ![Screenshot](pdsfit_Figure_1.png)
-![Screenshot](pdsfit_Figure_2.png)
-![Screenshot](pdsfit_Figure_3.png) -->
-
-
-## minfit.py
-A nonlinear fitting script (as in those usually performed through Excel)
-that performs through an error minimization algorithm.
-
-<img src="minfit_Figure_1.png" alt="drawing" width="350"/>
-<!--- ![Screenshot](minfit_Figure_1.png) -->
 
 ## linreg.py
 A simple template for linear fits
