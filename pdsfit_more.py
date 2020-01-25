@@ -26,6 +26,7 @@ import argparse
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 '----------------------------------------------------------------------------------------'
+'SPECIFY PATH AND FILE NAME HERE'
 ap.add_argument("-p", "--path", 
                 default= r'C:\...\group', 
                 help="global path to folder containing folders with datasets")

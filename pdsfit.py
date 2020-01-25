@@ -25,10 +25,12 @@ import argparse
  
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
-
+'----------------------------------------------------------------------------------------'
+'SPECIFY PATH AND FILE NAME HERE'
 ap.add_argument("-p", "--path", 
                 default= r'C:\...\Results.xls', 
                 help="path to dataset with file name")
+'----------------------------------------------------------------------------------------'
 
 ap.add_argument("-s", "--sheet", default='Results', 
                 help="name of sheet containing dataset")
