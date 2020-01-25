@@ -16,7 +16,7 @@ import matplotlib.pylab as plt
 import xlwings as xw
 import pandas as pd
 
-from makefit import *
+from frame_pdsfit import *
 
 ''' ARGS LIBRARY (line 27) '''
 
@@ -28,7 +28,7 @@ ap = argparse.ArgumentParser()
 '----------------------------------------------------------------------------------------'
 'SPECIFY PATH AND FILE NAME HERE'
 ap.add_argument("-p", "--path", 
-                default= r'C:\...\Results.xls', 
+                default= r'C:\Users\garci\Desktop\pds_examples\group\EXPT-A\Results.xls', 
                 help="path to dataset with file name")
 '----------------------------------------------------------------------------------------'
 
@@ -58,7 +58,8 @@ def one():
     idx = args["sheet"]
     book=xw.Book(args["path"])    
     column_data = book.sheets[idx].range( args["column"] + ':' + args["column"][0]+str(lastRow(idx,book)) ).value
-
+    
+    plt.style.use("ggplot")
     make(column_data,args["label"],args["distribution"],bins=args["bins"],plots=args["plots"],xlims=args["xrange"],colorbins=args["colorbins"])
     book.close()
     

@@ -5,9 +5,12 @@
 Welcome to the statistics repository! Some changes have been made to streamline the user experience. Click on the Jupyter presentations below to get a feel of the scripts and how to use them.
 
 
-## Histogram Distribution Fitting (New Version In Progress)
+## Histogram Distribution Fitting
 
-<a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_tutorial.ipynb"><img src="jupyter.png" alt="drawing" width="100"/></a>
+Basics
+<a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_intro.ipynb"><img src="jupyter.png" alt="drawing" width="100"/></a>
+Excel importer / terminal
+<a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_excel.ipynb"><img src="jupyter.png" alt="drawing" width="100"/></a>
 
 ## Equation Fitting - Local and Global Error Minimization Algorithms
 <a href="https://github.com/andrewrgarcia/statistics/blob/master/minimization-fitting.ipynb"><img src="jupyter.png" alt="drawing" width="100"/></a>

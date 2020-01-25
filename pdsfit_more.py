@@ -16,7 +16,7 @@ import matplotlib.pylab as plt
 import xlwings as xw
 import pandas as pd
 
-from makefit import *
+from frame_pdsfit import *
 
 ''' ARGS LIBRARY (line 27) '''
 
