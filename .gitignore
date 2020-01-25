@@ -4,3 +4,5 @@ __pycache__
 \.ipynb_checkpoints
 basinhopfit_copy.py
 bashop_TEMPLATE.xlsx
+
+pdsfit_old.py
