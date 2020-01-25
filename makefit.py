@@ -6,11 +6,8 @@ Created on Wed Sep 12 17:43:08 2018
 """
 
 ''' 
-makefit.py - A PROBABILITY DENSITY FUNCTION (PDF) FITTING PROGRAM
-Andrew Garcia*
-
-*adapted from Daniel Hnyk's python code:
-http://danielhnyk.cz/fitting-distribution-histogram-using-python/
+MAKEFIT.PY IS NOW FRAME_PDSFIT.PY. PLEASE USE FRAME_PDSFIT INSTEAD
+-Andrew
 '''
 
 from scipy import stats  
