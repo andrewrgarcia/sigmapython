@@ -7,9 +7,9 @@ Welcome to the statistics repository! Some changes have been made to streamline 
 
 ## Histogram Distribution Fitting
 
-Basics
+**Basics**
 <a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_intro.ipynb"><img src="jupyter.png" alt="drawing" width="100"/></a>
-Excel importer / terminal
+**Excel importer**
 <a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_excel.ipynb"><img src="jupyter.png" alt="drawing" width="100"/></a>
 
 ## Equation Fitting - Local and Global Error Minimization Algorithms
