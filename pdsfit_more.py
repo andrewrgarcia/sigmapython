@@ -78,7 +78,7 @@ def mult(toexcel=args["toExcel"]):
         idx = args["sheet"]
         column_data = book.sheets[idx].range( args["column"] + ':' + args["column"][0]+str(lastRow(idx,book)) ).value
 
-        
+        plt.style.use("ggplot")
         lbl,val = make(column_data, name,args["distribution"],bins=args["bins"],plots=args["plots"],xlims=args["xrange"],colorbins=args["colorbins"])
 
         if args["plots"] is not True:
