@@ -5,7 +5,7 @@
 Welcome to the statistics repository! Some changes have been made to streamline the user experience. Click on the Jupyter presentations below to get a feel of the scripts and how to use them.
 
 
-## Histogram Distribution Fitting
+## Histogram Distribution Fitting (New Version In Progress)
 
 <a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_tutorial.ipynb"><img src="jupyter.png" alt="drawing" width="100"/></a>
 
