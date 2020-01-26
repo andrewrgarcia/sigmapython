@@ -16,12 +16,12 @@ import matplotlib.pyplot as plt
 import xlwings as xw
 
 'CHANGE TO PATH OF EXCEL FILE WITH DATA'
-path = r'C:\Users\garci\Dropbox (Personal)\scripts\statistics\minfit_template.xlsx'
+path = r'C:\Users\garci\Dropbox (Personal)\scripts\statistics\templates-examples\minfit_template.xlsx'
 book = xw.Book(path)
 
 sheet='Sheet1'
 
-from pdsfit import lastRow
+from frame_pdsfit import lastRow
 
 x=book.sheets[sheet].range('A2:A'+str(lastRow(sheet,book))).value
 exps=book.sheets[sheet].range('B2:B'+str(lastRow(sheet,book))).value

@@ -23,12 +23,12 @@ from scipy.special import jv
 import xlwings as xw
 
 'CHANGE TO PATH OF EXCEL FILE WITH DATA'
-path = r'C:\Users\garci\Dropbox (Personal)\scripts\statistics\basinhop_template.xlsx'
+path = r'C:\Users\garci\Dropbox (Personal)\scripts\statistics\templates-examples\basinhop_template.xlsx'
 book = xw.Book(path)
 
 sheet='datagen'
 
-from pdsfit import lastRow
+from frame_pdsfit import lastRow
 
 x1=book.sheets[sheet].range('A2:A'+str(lastRow(sheet,book))).value
 x2=book.sheets[sheet].range('B2:B'+str(lastRow(sheet,book))).value
