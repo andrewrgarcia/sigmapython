@@ -28,7 +28,7 @@ ap = argparse.ArgumentParser()
 '----------------------------------------------------------------------------------------'
 'SPECIFY PATH AND FILE NAME HERE'
 ap.add_argument("-p", "--path", 
-                default= r'C:\Users\garci\Desktop\pds_examples\group\EXPT-A\Results.xls', 
+                default= r'C:\[your_path]\your_file.xls', 
                 help="path to dataset with file name")
 '----------------------------------------------------------------------------------------'
 
