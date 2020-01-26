@@ -21,16 +21,22 @@ Welcome to the statistics repository! Some changes have been made to streamline 
 * **minfit.py**
 * **basinhopfit.py**
 
-## spss_convert.py
+## SPSS to CSV Format Converter
 
 Extract SPSS files (.sav) with python / convert to .csv format
 
 * must install pyreadstat:
 > pip install pyreadstat
 
-## linreg.py
+### Python file(s):
+* **spss_convert.py**
+
+## Simple Linear Regression
 A simple template for linear fits
 - [x] Calculates R^2, p value, and standard error of a linear fitting.
 - [x] Example selects data points randomly and performs linear regression thereof:
 
 <img src="figures/linreg_Figure_1.png" alt="drawing" width="350"/><img src="figures/linreg_Figure_2.png" alt="drawing" width="350"/>
+
+### Python file(s):
+* **linreg.py**
