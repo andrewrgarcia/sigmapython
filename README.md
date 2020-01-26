@@ -11,9 +11,9 @@ Welcome to the statistics repository! Some changes have been made to streamline 
 **Excel importer**
 <a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_excel.ipynb"><img src="figures/jupyter.png" alt="drawing" width="100"/></a>
 ### Python file(s):
-**frame_pdsfit.py**
-**pdsfit.py**
-**pdsfit_more.py**
+* **frame_pdsfit.py**
+* **dsfit.py**
+* **pdsfit_more.py**
 
 ## Equation Fitting - Local and Global Error Minimization Algorithms
 <a href="https://github.com/andrewrgarcia/statistics/blob/master/minimization-fitting.ipynb"><img src="figures/jupyter.png" alt="drawing" width="100"/></a>
