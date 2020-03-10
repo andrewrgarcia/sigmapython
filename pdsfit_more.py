@@ -76,7 +76,7 @@ def mult(toexcel=args["toExcel"]):
         idx = args["sheet"]
         column_data = book.sheets[idx].range( args["column"] + ':' + args["column"][0]+str(lastRow(idx,book)) ).value
 
-        plt.style.use("ggplot")
+#        plt.style.use("ggplot")
         f = make_wplt if args["plots"] == 'y' else make
         lbl,val = f(column_data, name,args["distribution"],bins=args["bins"],\
                        xlims=[float(args["xrange"][0]),float(args["xrange"][1])] \

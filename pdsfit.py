@@ -41,8 +41,8 @@ ap.add_argument("-d", "--distribution", default=['gauss','lognorm','expon','gamm
                 nargs = '+', type =str,
                 help="distribution fitting models *type each separated by a space\
                 i.e. -d gauss lognorm ... (default: all)") 
-ap.add_argument("-plt", "--plots", default=True, 
-                help="make plots for all data being fitted (default: True)")
+ap.add_argument("-plt", "--plots", default='y', 
+                help="make plots for all data being fitted (default: y[yes])")
 ap.add_argument("-b", "--bins", type=int, default=8, 
                 help="# of bins to display for histogram (default: 8)")
 ap.add_argument("-r", "--xrange", default=None,nargs = '+', 
@@ -59,8 +59,9 @@ def one():
     book=xw.Book(args["path"])    
     column_data = book.sheets[idx].range( args["column"] + ':' + args["column"][0]+str(lastRow(idx,book)) ).value
     
-    plt.style.use("ggplot")
-    make(column_data,args["label"],args["distribution"],bins=args["bins"],plots=args["plots"],\
+#    plt.style.use("ggplot")
+    f = make_wplt if args["plots"] == 'y' else make
+    f(column_data,args["label"],args["distribution"],bins=args["bins"],\
          xlims=[float(args["xrange"][0]),float(args["xrange"][1])] if args["xrange"] is not None else '',\
          colorbins=args["colorbins"])
     book.close()

@@ -151,13 +151,10 @@ def make_wplt(data,name,pds=['gauss','lognorm','expon','gamma','beta'],\
 
     
     plt.ylabel('Normalized Counts')
-#    plt.xlabel('x-axis')
-    plt.xlabel('Crystal Length  /  $\mu m$')
 
-#    plt.title(name)
     'only for gauss'
     if 'gauss' in pds:
-        plt.title(r'Gaussian dist. stats: $\bar{x}$ ='+'{} $\mu m$'.format(np.round(pars[0],2))+\
+        plt.title(r'Gaussian dist. stats: $\bar{x}$ ='+'{}'.format(np.round(pars[0],2))+\
                   r'    $\bar{s}$ ='+'{}    (N = {})'.format(np.round(pars[1],2),len(data))
                   ) 
     
