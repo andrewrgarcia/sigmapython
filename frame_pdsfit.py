@@ -6,7 +6,8 @@ Created on Wed Sep 12 17:43:08 2018
 """
 
 ''' 
-frame_pdsfit.py - A PROBABILITY DENSITY FUNCTION (PDF) FITTING PROGRAM
+A PROBABILITY DENSITY FUNCTION (PDF) FITTING PROGRAM
+frame_pdsfit.py - framework for pdsfit and pdsfitmore scripts
 Andrew Garcia*
 
 *adapted from Daniel Hnyk's python code:
@@ -42,12 +43,44 @@ def lastRow(idx, workbook, col=1):
 
     return lwr_cell.row
 
+def fit_core(data,typedist):
 
-def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],\
-         plots=True,bins= 15,xlims=[0,400],colorbins='dodgerblue'):
+    if typedist == 'gauss':
+        distfit,statspdf = stats.norm.fit,stats.norm.pdf
+        labels,pltlbl,colr = ['normal_mean', 'normal_sdev'], 'normal','C1'
+        
+    elif typedist == 'lognorm':
+        distfit,statspdf = stats.lognorm.fit,stats.lognorm.pdf
+        labels,pltlbl,colr = ['lognorm_s/sigma', 'lognorm_loc',\
+                              'lognorm_scale/median/exp_mean'], 'lognormal','C0'
+        
+        '''parametrization
+        https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html
+        https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html
+        mean = np.log(scale)
+        sigma = s
+        median = scale '''
+        
+    elif typedist == 'expon':
+        distfit,statspdf = stats.expon.fit,stats.expon.pdf
+        labels,pltlbl,colr = ['expon_loc','expon_scale'], 'exponential','k'
+
+    elif typedist == 'gamma':
+        distfit,statspdf = stats.gamma.fit,stats.gamma.pdf
+        labels,pltlbl,colr = ['gamma_a','gamma_b','gamma_c'], 'gamma','magenta'
+    elif typedist == 'beta':
+        distfit,statspdf = stats.beta.fit,stats.beta.pdf
+        labels,pltlbl,colr = ['beta_a','beta_b','beta_c','beta_d'], 'beta','C2'
     
-    plt.figure() if plots is True else None
+    
+    pars = distfit(data)
+    
+    return distfit,statspdf,labels,pltlbl,colr,pars
 
+def make_wplt(data,name,pds=['gauss','lognorm','expon','gamma','beta'],\
+         bins= 15,xlims=[0,400],colorbins='dodgerblue'):
+    
+    plt.figure()
 
     n0, bin_edges = np.histogram(data,bins = bins)
     
@@ -84,48 +117,19 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],\
     stats_lbl = []
     stats_val = []
 
-
     def fit(typedist):
     
-        if typedist == 'gauss':
-            distfit,statspdf = stats.norm.fit,stats.norm.pdf
-            labels,pltlbl,colr = ['normal_mean', 'normal_sdev'], 'normal','C1'
-            
-        elif typedist == 'lognorm':
-            distfit,statspdf = stats.lognorm.fit,stats.lognorm.pdf
-            labels,pltlbl,colr = ['lognorm_s/sigma', 'lognorm_loc',\
-                                  'lognorm_scale/median/exp_mean'], 'lognormal','C0'
-            
-            '''parametrization
-            https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html
-            https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html
-            mean = np.log(scale)
-            sigma = s
-            median = scale '''
-            
-        elif typedist == 'expon':
-            distfit,statspdf = stats.expon.fit,stats.expon.pdf
-            labels,pltlbl,colr = ['expon_loc','expon_scale'], 'exponential','k'
-
-        elif typedist == 'gamma':
-            distfit,statspdf = stats.gamma.fit,stats.gamma.pdf
-            labels,pltlbl,colr = ['gamma_a','gamma_b','gamma_c'], 'gamma','magenta'
-        elif typedist == 'beta':
-            distfit,statspdf = stats.beta.fit,stats.beta.pdf
-            labels,pltlbl,colr = ['beta_a','beta_b','beta_c','beta_d'], 'beta','C2'
+        distfit,statspdf,labels,pltlbl,colr,pars = fit_core(data,typedist)
         
-        
-        pars = distfit(data)
         'Normalize pdf (integral of pdf ~ 1.0)'
         max_pdf = np.max(statspdf(lspc, *pars))
         max_normbins=np.max(n)
-        
         
         #    max_normbins=np.max(n0)/Ahist
 
         pdf = statspdf(lspc, *pars)  * (max_normbins/max_pdf)     
     
-        plt.plot(lspc, pdf,color=colr,label=pltlbl) if plots is True else None
+        plt.plot(lspc, pdf,color=colr,label=pltlbl)
     
         print('')
         print(name)
@@ -155,8 +159,39 @@ def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],\
     if 'gauss' in pds:
         plt.title(r'Gaussian dist. stats: $\bar{x}$ ='+'{} $\mu m$'.format(np.round(pars[0],2))+\
                   r'    $\bar{s}$ ='+'{}    (N = {})'.format(np.round(pars[1],2),len(data))
-                  ) if plots is True else None
+                  ) 
     
-    plt.legend() if plots is True else None
+    plt.legend() 
     plt.show() 
     return stats_lbl, stats_val
+
+
+def make(data,name,pds=['gauss','lognorm','expon','gamma','beta'],\
+         bins= 15,xlims=[0,400],colorbins='dodgerblue'):
+    
+    'save stats -- labels and values'
+
+    stats_lbl = []
+    stats_val = []
+    def fit(typedist):
+
+        distfit,statspdf,labels,pltlbl,colr,pars = fit_core(data,typedist)
+           
+        print('')
+        print(name)
+        
+        for i in range(len(labels)):
+            print(labels[i],pars[i])
+        
+        for i in range(len(labels)):
+            stats_lbl.append(labels[i]), stats_val.append(pars[i])
+        
+        return stats_lbl, stats_val
+
+    pars=fit('gauss') if 'gauss' in pds else None
+    fit('lognorm') if 'lognorm' in pds else None
+    fit('expon') if 'expon' in pds else None
+    fit('gamma') if 'gamma' in pds else None
+    fit('beta') if 'beta' in pds else None
+    
+    return pars
