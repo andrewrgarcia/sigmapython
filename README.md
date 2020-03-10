@@ -7,10 +7,14 @@ Welcome to the statistics repository! Some changes have been made to streamline 
 
 ## Histogram Distribution Fitting
 **WATCH THE VIDEO**
+
 <a href="https://youtu.be/zDbmQZw_vzo"><img src="figures/yt_logo.png" alt="drawing" width="400"/></a>
+
 **_old Basics**
+
 <a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_intro.ipynb"><img src="figures/jupyter.png" alt="drawing" width="100"/></a>
 **_old Excel importer**
+
 <a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_excel.ipynb"><img src="figures/jupyter.png" alt="drawing" width="100"/></a>
 ### Python file(s):
 * **frame_pdsfit.py**
