@@ -10,14 +10,19 @@ import numpy as np
 import matplotlib.pylab as plt
 import pandas
 
-your_file_here = 'test.xlsx'
 
-data = pandas.read_excel(your_file_here)
+# 'bins are number of bins; alpha is transparency level'
+def make_stuff(file_name,bins=6,colorbins='C01',alpha=0.5):
+    
+    data = pandas.read_excel(file_name)
+    
+    plt.hist(data.transpose(), alpha = 0.5, color=colorbins, \
+             stacked = True, bins = bins, edgecolor='w',linewidth=1.2)
+        
 
-#number of histogram bins
-bins = 6
-#color of your bins
-colorbins = 'C0'
+file1 = 'first_file.xlsx'
+file2 = 'second_file.xlsx'
 
-plt.hist(data.transpose(), alpha = 0.5, color=colorbins, \
-         stacked = True, bins = bins, edgecolor='w',linewidth=1.2)
+
+make_stuff(file1,6,'magenta',0.7)
+make_stuff(file2,6,'blue',0.5)
