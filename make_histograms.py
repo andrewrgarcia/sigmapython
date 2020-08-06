@@ -36,7 +36,8 @@ def make_stuff(file_name,bins=6,colorbins='C01',alpha=0.5,den_norm='y'):
     
     
     n, bins, patches = plt.hist(data.transpose(), alpha = 0.5, color=colorbins, \
-             stacked = True, weights=wts,bins = bins, edgecolor='w',linewidth=1.2)
+             stacked = True, weights=wts,bins = bins, edgecolor='w',\
+                 label=file_name[:-5],linewidth=1.2)
         
 
 'EXECUTION'
@@ -49,3 +50,5 @@ plt.figure()
 
 make_stuff(file1,10,'magenta',0.7)
 make_stuff(file2,6,'blue',0.5)
+
+plt.legend()
