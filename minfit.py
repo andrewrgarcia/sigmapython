@@ -71,7 +71,7 @@ args = vars(ap.parse_args())
 
 def E(coeffs):
     
-    # C1,C2,C3,C4 = coeffs
+    #C1,C2,C3,C4 = coeffs
     C1,C2 = coeffs
     
     if args['simple_regression'] != '':
@@ -93,7 +93,7 @@ def make():
     
     # print(len(varls_packed.columns))
     vpc= varls_packed.columns
-    print('fitted coefficients')
+    print('fitted coefficients:')
     
     [print('C_{} : {}'.format(i+1, result.x[i])) \
      for i in range(len(result.x))]
@@ -150,8 +150,9 @@ else:
     
     varls=sht[sht.columns[0]]
     y_obs = sht[sht.columns[-1]]
-    print(y_obs)
-    
+    print('your data:')
+    print(sht)
+    print()
     # table = sht[sht.columns[0:-1][0]]
     varls_packed = sht.loc[:, sht.columns != 'y']
     
