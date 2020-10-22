@@ -15,12 +15,14 @@ def eqn(varls,coeffs):
     
     C1,C2 = coeffs
     
-    x,x2=varls
-    return C1*x**2 + C2*x2 
-    
     # x=varls
     # return C1*x**2 + C2
     
+    x,x2=varls
+    return C1*x**2 + C2*x2 
     
-'if number of coeffs is not 2, change: lines 60 and 76 in minfit.py'
+
+    
+    
+'if number of coeffs is not 2, change: lines 75 and 91 in minfit.py'
 

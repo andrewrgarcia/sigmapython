@@ -1,12 +1,27 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Oct 13 13:04:28 2018
+"""*[initial code]
+*Created on Sat Oct 13 13:04:28 2018
 
 @author: garci
 """
+print('''                                                                                           
+__  __   ___   .--.   _..._             .--.               _________   _...._                    
+|  |/  `.'   `. |__| .'     '.      _.._ |__|               \        |.'      '-. .-.          .- 
+|   .-.  .-.   '.--..   .-.   .   .' .._|.--.     .|         \        .'```'.    '.\ \        / / 
+|  |  |  |  |  ||  ||  '   '  |   | '    |  |   .' |_         \      |       \     \\ \      / /  
+|  |  |  |  |  ||  ||  |   |  | __| |__  |  | .'     |         |     |        |    | \ \    / /   
+|  |  |  |  |  ||  ||  |   |  ||__   __| |  |'--.  .-'         |      \      /    .   \ \  / /    
+|  |  |  |  |  ||  ||  |   |  |   | |    |  |   |  |   ,.--.   |     |\`'-.-'   .'     \ `  /     
+|__|  |__|  |__||__||  |   |  |   | |    |__|   |  |  //    \  |     | '-....-'`        \  /      
+                    |  |   |  |   | |           |  '.'\\    / .'     '.                 / /       
+                    |  |   |  |   | |           |   /  `'--''-----------'           |`-' /        
+                    '--'   '--'   |_|           `'-'                                 '..'         
+                      
+                    A PROGRAM FOR EQUATION CURVE FITTING 
+                                Andrew Garcia, 2020*  
+''')
 
-'''EQUATION FITTING THROUGH MINIMIZED SUM OF RESIDUALS TECHNIQUE'
-Andrew Garcia'''
+
 import numpy as np
 import scipy.optimize as optimize
 import matplotlib.pyplot as plt
@@ -21,35 +36,35 @@ ap = argparse.ArgumentParser()
 ap.add_argument("-e", "--equation_editor", \
                 default = '',\
                     type = str, help="equation editor: type any letter or number\
-                        to open the equation editor")
+                        to open the equation editor (default: '' [inactive]) ")
                         
 ap.add_argument("-s", "--simple_regression", \
                 default = '',\
                     type = str, help=r"if regression has only one independent 'x' variable\
                         (e.g. y = 4x and not y =3a + 4b**2 +5c) type any letter or number \
-                            here")
+                            to activate option (default: '' [inactive])")
                         
 ap.add_argument("-os", "--operating_system", \
                 default = 'LIN',\
                     type = str, help="name of operating system: LIN for Linux \
-                        WIN for Windows or Mac")
+                        WIN for Windows or Mac (default: LIN)")
                         
     
 ap.add_argument("-p", "--path_repository", \
                 default = '/home/andrew/scripts/statistics/',\
                     type = str, help=r"type the computer path of the folder containing \
-                        this python file (for windows something like this r'C:\Users\...\statistics\' )")
-                        
+                        this python file (for windows something like this: r'C:\Users\...\statistics\' )")
+
 ap.add_argument("-d", "--pathfile_data", \
                 default = '/home/andrew/scripts/statistics/templates-examples/minfit_template.xlsx',\
                     type = str, help=r"type the path and filename of your Excel sheet \
-                        data file  (for windows something like this \
+                        data file  (for windows something like this: \
                                     r'C:\Users\...\statistics\templates-examples\minfit_template.xlsx")
                         
 ap.add_argument("-sh", "--sheet_data", \
                 default = 'Sheet1',\
                     type = str, help="if not on Sheet1, type the name of the sheet \
-                        with your data")
+                        with your data (default: Sheet1)")
                         
 args = vars(ap.parse_args())
 
@@ -98,6 +113,8 @@ def make():
 
 # if True == True:
 if args['equation_editor'] != '':
+    print(r'Edit the following files (if needed) to define your equation in \
+          eqn(), dependent variables (varls) and fitting coefficients (coeffs)')
     pathrep = args['path_repository']
     if args['operating_system'] == 'LIN':
 
