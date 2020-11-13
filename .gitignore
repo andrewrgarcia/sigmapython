@@ -1,13 +1,18 @@
-pds_database.py
-pds_database_old.py
 __pycache__
 \.ipynb_checkpoints
 \youtube
+\csse_covid_19_data_ARG
+
 basinhopfit_copy.py
 bashop_TEMPLATE.xlsx
+minfit_template_SOLVER-check.xlsx
+pdsfitmore_info.xlsx
 
+pds_database.py
+pds_database_old.py
 pdsfit_old.py
+c19_minfit.py
+
 randPDS.py
 
-minfit_template_SOLVER-check.xlsx
 

@@ -14,7 +14,7 @@ Andrew Garcia, 2020
 from scipy import stats  
 import numpy as np  
 import matplotlib.pylab as plt
-import xlwings as xw
+# import xlwings as xw
 import pandas as pd
 #frame_pdsfit has make and LastRow
 from frame_pdsfit import *
@@ -29,7 +29,7 @@ ap = argparse.ArgumentParser()
 '----------------------------------------------------------------------------------------'
 'SPECIFY PATH AND FILE NAME HERE'
 ap.add_argument("-p", "--path", 
-                default= r'C:\[your_path]\dataset', 
+                default= '/home/andrew/scripts/statistics/templates-examples/pdsfit/dataset', 
                 help="global path to folder containing folders with datasets")
 
 ap.add_argument("-fn", "--xlfilename", default='Results.xls', 
@@ -39,8 +39,8 @@ ap.add_argument("-fn", "--xlfilename", default='Results.xls',
 '----------------------------------------------------------------------------------------'
 ap.add_argument("-s", "--sheet", default='Results', 
                 help="name of sheet containing dataset (default: Results)")
-ap.add_argument("-v", "--column", default='H2', 
-                help="vector/column with dataset (default: H2)")
+ap.add_argument("-n", "--column_name", default='value', 
+                help="column name to get histogram info ")
 ap.add_argument("-d", "--distribution", default=['gauss','lognorm','expon','gamma','beta'],
                 nargs = '+', type =str,
                 help="distribution fitting models *type each separated by a space\
@@ -69,20 +69,21 @@ def mult(toexcel=args["toExcel"]):
     
     Gval = []
     folder_names = os.listdir(args["path"])
-
     for name in folder_names:
-        book=xw.Book(args["path"]+r'/'+ name + r'/' + args["xlfilename"])
+        # book=xw.Book(args["path"]+r'/'+ name + r'/' + args["xlfilename"])
+        book = pd.read_excel(args["path"]+r'/'+ name + r'/' + args["xlfilename"])
         
-        idx = args["sheet"]
-        column_data = book.sheets[idx].range( args["column"] + ':' + args["column"][0]+str(lastRow(idx,book)) ).value
-
+        # idx = args["sheet"]
+        # column_data = book.sheets[idx].range( args["column"] + ':' + args["column"][0]+str(lastRow(idx,book)) ).value
 #        plt.style.use("ggplot")
         f = make_wplt if args["plots"] == 'y' else make
-        lbl,val = f(column_data, name,args["distribution"],bins=args["bins"],\
+        lbl,val = f(book[args["column_name"]], name,args["distribution"],bins=args["bins"],\
                        xlims=[float(args["xrange"][0]),float(args["xrange"][1])] \
                        if args["xrange"] is not None else '', colorbins=args["colorbins"])
-        
-        book.close()
+        # lbl,val = f(column_data, name,args["distribution"],bins=args["bins"],\
+        #                xlims=[float(args["xrange"][0]),float(args["xrange"][1])] \
+        #                if args["xrange"] is not None else '', colorbins=args["colorbins"])
+        # book.close()
         Gval.append(val)
         
     df = pd.DataFrame(Gval, columns=lbl)
@@ -91,9 +92,9 @@ def mult(toexcel=args["toExcel"]):
     
     if toexcel == 'y':
         'write to excel'
-        wb = xw.Book()
-        sht = wb.sheets['Sheet1']
-        sht.range('A1').value = df
-        sht.range('A1').options(pd.DataFrame, expand='table').value
-        
+        # wb = xw.Book()
+        # sht = wb.sheets['Sheet1']
+        # sht.range('A1').value = df
+        # sht.range('A1').options(pd.DataFrame, expand='table').value
+        df.to_excel('/home/andrew/scripts/statistics/pdsfitmore_info.xlsx', index = False)
 mult()

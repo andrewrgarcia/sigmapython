@@ -17,7 +17,7 @@ http://danielhnyk.cz/fitting-distribution-histogram-using-python/
 from scipy import stats  
 import numpy as np  
 import matplotlib.pylab as plt
-import xlwings as xw
+# import xlwings as xw
 import pandas as pd
 
 '''lastRow credit: answered Sep 14 '16 at 11:39  -  Stefan 
