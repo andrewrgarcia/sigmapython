@@ -1,4 +1,4 @@
-# A Simple and Free Statistics Package
+# A Simple Open-Source Statistics Rep.
 ## Andrew Garcia
 <img src="figures/basinhopfit_Figure_1.png" alt="drawing" width="400"/>
 
@@ -6,24 +6,17 @@ Welcome to the statistics repository! Some changes have been made to streamline 
 
 
 ## Histogram Distribution Fitting
-**WATCH THE VIDEO**
 
-<a href="https://youtu.be/zDbmQZw_vzo"><img src="figures/yt_logo.png" alt="drawing" width="400"/></a>
 
-**_old Basics     _old Excel importer**
-
-<a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_intro.ipynb"><img src="figures/jupyter.png" alt="drawing" width="100"/></a>
-<a href="https://github.com/andrewrgarcia/statistics/blob/master/pdsfit_excel.ipynb"><img src="figures/jupyter.png" alt="drawing" width="100"/></a>
-### Python file(s):
-* **frame_pdsfit.py**
-* **pdsfit.py**
-* **pdsfit_more.py**
+#### frame_pdsfit.py
+#### pdsfit.py
+#### pdsfit_more.py
 
 ## Equation Fitting - Local and Global Error Minimization Algorithms
 <a href="https://github.com/andrewrgarcia/statistics/blob/master/minimization-fitting.ipynb"><img src="figures/jupyter.png" alt="drawing" width="100"/></a>
-### Python file(s):
-* **minfit.py**
-* **basinhopfit.py**
+
+#### minfit.py
+#### basinhopfit.py
 
 ## Simple Linear Regression
 A simple template for linear fits
@@ -32,8 +25,8 @@ A simple template for linear fits
 
 <img src="figures/linreg_Figure_1.png" alt="drawing" width="350"/><img src="figures/linreg_Figure_2.png" alt="drawing" width="350"/>
 
-### Python file(s):
-* **linreg.py**
+
+#### linreg.py
 
 ## SPSS to CSV Format Converter
 Extract SPSS files (.sav) with python / convert to .csv format
@@ -41,8 +34,7 @@ Extract SPSS files (.sav) with python / convert to .csv format
 * must install pyreadstat:
 > pip install pyreadstat
 
-### Python file(s):
-* **spss_convert.py**
+#### spss_convert.py
 
 
 Copyright 2019 Andrew Garcia
