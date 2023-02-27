@@ -26,3 +26,14 @@ ex2.make()
 ex3.name = 'example3'
 ex3.bins = bins
 ex3.make()
+
+
+'''pdsfit_excel.ipynb adaptation (simpler; pdsfit* functions discontinued)'''
+import pandas
+
+for i in range(1,6):
+    
+    data = sp.Dev()
+    data.loadexcel('templates-examples/pdsfit/example{}.xls'.format(i))
+    data.name = 'example'+str(3+i)
+    data.make()

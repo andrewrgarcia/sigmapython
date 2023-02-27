@@ -1,8 +1,9 @@
 
 import sigmapython.histogram as hist
+import pandas
 
 class Dev:
-    def __init__(self,x) -> None:
+    def __init__(self,x=[]) -> None:
         '''
         Dev class. To hold all methods
 
@@ -35,4 +36,14 @@ class Dev:
             hist.make_wplt(self.x,self.name,self.pds,self.bins,self.xlims,colorbins)
         else:
             hist.make(self.x,self.name,self.pds,self.bins,self.xlims,colorbins)
+
+
+    def loadexcel(self,file):
+        data = pandas.read_excel(file)
+        if len(data.columns) > 1:
+            x = data[data.columns[1]]
+        else:
+            x = data[data.columns[0]]
+
+        self.x = x
 
