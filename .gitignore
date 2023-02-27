@@ -1,20 +1,6 @@
 __pycache__
-\.ipynb_checkpoints
-\youtube
-\csse_covid_19_data_ARG
+__ignore__
 
-basinhopfit_copy.py
-bashop_TEMPLATE.xlsx
-minfit_template_SOLVER-check.xlsx
-pdsfitmore_info.xlsx
 
-pds_database.py
-pds_database_old.py
-pdsfit_old.py
-c19_minfit.py
-
-randPDS.py
-
-templates-examples/Bitst*
 
 

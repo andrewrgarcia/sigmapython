@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "sigmapython"
 version = "0.1.0"
-description = "A simple, open-source statistics package by Andrew"
+description = "Refactoring statistics code from the graveyard (2020)." 
 authors = ["andrewrgarcia <garcia.gtr@gmail.com>"]
 license = "MIT"
 readme = "README.md"
