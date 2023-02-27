@@ -3,9 +3,9 @@ import numpy as np
 
 '''pdsfit_intro.ipynb adaptation'''
 
-ex1 = sp.Dev(np.random.normal(10, 10, 1000))
-ex2 = sp.Dev(2*np.random.uniform(1,40, 1000) + np.random.normal(10, 10, 1000))
-ex3 = sp.Dev(3*np.random.exponential(4,100))
+ex1 = sp.Pop(np.random.normal(10, 10, 1000))
+ex2 = sp.Pop(2*np.random.uniform(1,40, 1000) + np.random.normal(10, 10, 1000))
+ex3 = sp.Pop(3*np.random.exponential(4,100))
 
 bins =20 
 
@@ -33,7 +33,7 @@ import pandas
 
 for i in range(1,6):
     
-    data = sp.Dev()
+    data = sp.Pop()
     data.loadexcel('templates-examples/pdsfit/example{}.xls'.format(i))
     data.name = 'example'+str(3+i)
     data.make()
