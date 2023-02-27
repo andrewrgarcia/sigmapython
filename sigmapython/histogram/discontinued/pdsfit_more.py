@@ -29,7 +29,7 @@ ap = argparse.ArgumentParser()
 '----------------------------------------------------------------------------------------'
 'SPECIFY PATH AND FILE NAME HERE'
 ap.add_argument("-p", "--path", 
-                default= '/home/andrew/scripts/statistics/templates-examples/pdsfit/dataset', 
+                default= '/home/andrew/scripts/statistics/templates/pdsfit/dataset', 
                 help="global path to folder containing folders with datasets")
 
 ap.add_argument("-fn", "--xlfilename", default='Results.xls', 

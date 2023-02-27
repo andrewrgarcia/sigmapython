@@ -34,6 +34,6 @@ import pandas
 for i in range(1,6):
     
     data = sp.Pop()
-    data.loadexcel('templates-examples/pdsfit/example{}.xls'.format(i))
+    data.loadexcel('templates/pdsfit/example{}.xls'.format(i))
     data.name = 'example'+str(3+i)
     data.make()

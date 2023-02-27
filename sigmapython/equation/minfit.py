@@ -56,10 +56,10 @@ ap.add_argument("-p", "--path_repository", \
                         this python file (for windows something like this: r'C:\Users\...\statistics\' )")
 
 ap.add_argument("-d", "--pathfile_data", \
-                default = '/home/andrew/scripts/statistics/templates-examples/minfit_template.xlsx',\
+                default = '/home/andrew/scripts/statistics/templates/minfit_template.xlsx',\
                     type = str, help=r"type the path and filename of your Excel sheet \
                         data file  (for windows something like this: \
-                                    r'C:\Users\...\statistics\templates-examples\minfit_template.xlsx")
+                                    r'C:\Users\...\statistics\templates\minfit_template.xlsx")
                         
 ap.add_argument("-sh", "--sheet_data", \
                 default = 'Sheet1',\
@@ -141,7 +141,7 @@ else:
     
     'load data to fit'
     #'Windows
-    # file = r'C:\Users\...\statistics\templates-examples\minfit_template.xlsx'
+    # file = r'C:\Users\...\statistics\templates\minfit_template.xlsx'
     #'Linux
     file = args['pathfile_data']
     
