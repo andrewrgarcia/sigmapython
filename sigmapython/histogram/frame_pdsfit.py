@@ -78,7 +78,7 @@ def fit_core(data,typedist):
     return distfit,statspdf,labels,pltlbl,colr,pars
 
 def make_wplt(data,name,pds=['gauss','lognorm','expon','gamma','beta'],\
-         bins= 15,xlims=[0,400],colorbins='dodgerblue'):
+         bins= 15,xlims=[0,400],colorbins='dodgerblue',alpha=0.5,den_norm=True):
     
     plt.figure()
 
@@ -93,11 +93,11 @@ def make_wplt(data,name,pds=['gauss','lognorm','expon','gamma','beta'],\
     
     'plot density histogram'
 #    wts = np.ones_like(data) / np.max(n0)
-    wts = np.ones_like(data) /  Ahist
+    wts = np.ones_like(data) /  Ahist if den_norm else None
 
     
     n, bins, patches = plt.hist(data,bins = bins,stacked =True, weights=wts,\
-                                color=colorbins,edgecolor='w',linewidth=1.2) 
+                                color=colorbins,alpha=alpha,edgecolor='w',linewidth=1.2) 
     
     
     plt.xlim(xlims) if xlims != '' else None

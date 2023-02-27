@@ -30,10 +30,10 @@ class Dev:
         self.xlims = '' # =[0,400]
 
         
-    def make(self,colorbins='dodgerblue'):
+    def make(self,colorbins='dodgerblue',alpha=0.5,den_norm=True):
         
         if self.plots:
-            hist.make_wplt(self.x,self.name,self.pds,self.bins,self.xlims,colorbins)
+            hist.make_wplt(self.x,self.name,self.pds,self.bins,self.xlims,colorbins,alpha,den_norm)
         else:
             hist.make(self.x,self.name,self.pds,self.bins,self.xlims,colorbins)
 
